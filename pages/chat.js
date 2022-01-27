@@ -1,22 +1,53 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { createClient } from '@supabase/supabase-js'
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxNzAwMCwiZXhwIjoxOTU4ODkzMDAwfQ.bUTNU3KNTAF2FDUWEFqN7bViY6v_MlhR6sgvtLTRsDQ';
+const SUPABASE_URL = 'https://tmujwyhpzihqnkdcswuk.supabase.co'
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// const dadosDoSupabase = supabaseClient
+//     .from('mensagens')
+//     .select('*')
+//     .then((dados)=>{
+//         console.log('Dados da Consulta: ', dados.data)
+//     })
+
 
 export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
+    React.useEffect(() => {
+            supabaseClient
+            .from('mensagens')
+            .select('*')
+            .order('id', {ascending: false})
+            .then(({ data })=>{
+                // console.log('Dados da Consulta: ', data);
+                setListaDeMensagens(data);
+            })
+    }, []);
+
     function handleNovaMensagem(mensagemQueVeioDoOnKeyPress){
         const mensagem = {
             texto: mensagemQueVeioDoOnKeyPress,
             de: 'albertojuniorhc',
-            id: listaDeMensagens.length + 1
+            // id: listaDeMensagens.length + 1
         }
+
+        supabaseClient
+            .from('mensagens')
+            .insert([
+                mensagem
+            ]).then(({ data })=> {
+                setListaDeMensagens([
+                    data[0],
+                    ...listaDeMensagens,
+                ])
+            });
         
-        setListaDeMensagens([
-            mensagem,
-            ...listaDeMensagens,
-        ])
         setMensagem('');
     }
 
@@ -125,7 +156,7 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
+    // console.log('MessageList', props);
     return (
         <Box
             tag="ul"
