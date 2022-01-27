@@ -37,7 +37,7 @@ export default function PaginaInicial() {
     // const username = 'albertojuniorhc';
     const [username, setUsername] = React.useState('');
     const roteamento = useRouter();
-    const [disable, setDisable] = React.useState(true);
+    const [disableBtn, setDisableBtn] = React.useState(true);
 
     return (
       <>
@@ -96,7 +96,7 @@ export default function PaginaInicial() {
               <TextField
                 value={username}
                 onChange = {(event) => {
-                    (event.target.value.length >= 3) ? setDisable(false) : setDisable(true);
+                    (event.target.value.length >= 3) ? setDisableBtn(false) : setDisableBtn(true);
                     setUsername(event.target.value);   
                 }}
               
@@ -113,7 +113,7 @@ export default function PaginaInicial() {
               <Button
                 type='submit'
                 label='Entrar'
-                disabled={disable}
+                disabled={disableBtn}
                 fullWidth
                 buttonColors={{
                   contrastColor: appConfig.theme.colors.neutrals["000"],
