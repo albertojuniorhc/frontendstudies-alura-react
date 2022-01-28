@@ -1,26 +1,27 @@
-import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import { Box, Text, TextField, Image } from '@skynexui/components';
+import { Button, Title, Label} from '../components'
 import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-function Title(props){
+// function Title(props){
     
-    const Tag = props.tag || 'h1';
-    // console.log('Props: ', props);
-    // console.log('Tag: ', props.tag)
-    return (
-        <>
-            <Tag>{props.children}</Tag>
-            <style jsx>{`
-            ${Tag} {
-            color: ${appConfig.theme.colors.neutrals['500']};
-            font-size: 24px;
-            font-weight: 600;
-                }
-            `}</style>
-        </>
-    );
-}
+//     const Tag = props.tag || 'h1';
+//     // console.log('Props: ', props);
+//     // console.log('Tag: ', props.tag)
+//     return (
+//         <>
+//             <Tag>{props.children}</Tag>
+//             <style jsx>{`
+//             ${Tag} {
+//             color: ${appConfig.theme.colors.neutrals['500']};
+//             font-size: 24px;
+//             font-weight: 600;
+//                 }
+//             `}</style>
+//         </>
+//     );
+// }
 
 // function HomePage() {
 //     return (
@@ -38,6 +39,11 @@ export default function PaginaInicial() {
     const [username, setUsername] = React.useState('');
     const roteamento = useRouter();
     const [disableBtn, setDisableBtn] = React.useState(true);
+
+    const handleOnChange = (event) => {
+      (event.target.value.length >= 3) ? setDisableBtn(false) : setDisableBtn(true);
+      setUsername(event.target.value);
+    }
 
     return (
       <>
@@ -67,20 +73,30 @@ export default function PaginaInicial() {
             {/* Formulário */}
             <Box
               as="form"
-              onSubmit = { (event) => {
+              onSubmit={ (event) => {
                   event.preventDefault();
-                //   window.location.href = '/chat';
-                roteamento.push('/chat')
+                  roteamento.push('/chat')
                 }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
               }}
             >
-              <Title>Boas vindas de volta!</Title>
+              <Title
+                tag='h1'
+                theme={appConfig.theme}
+                >
+                  Boas vindas de volta!
+              </Title>
+              
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
+
+              <Label
+              theme={appConfig.theme}
+              id='oi123'
+              >Oi</Label>
               
               {/* <input 
               type="text"
@@ -95,10 +111,10 @@ export default function PaginaInicial() {
 
               <TextField
                 value={username}
-                onChange = {(event) => {
-                    (event.target.value.length >= 3) ? setDisableBtn(false) : setDisableBtn(true);
-                    setUsername(event.target.value);   
-                }}
+                // onChange={(event) => {
+                //      handleOnChange(event)
+                // }}
+                onChange={handleOnChange} // <== iSSO FUNCIONA IGUAL AS 3 LINHAS ACIMA,
               
                 fullWidth
                 textFieldColors={{
@@ -110,17 +126,13 @@ export default function PaginaInicial() {
                   },
                 }}
               />
-              <Button
+              <Button 
                 type='submit'
                 label='Entrar'
                 disabled={disableBtn}
                 fullWidth
-                buttonColors={{
-                  contrastColor: appConfig.theme.colors.neutrals["000"],
-                  mainColor: appConfig.theme.colors.primary[500],
-                  mainColorLight: appConfig.theme.colors.primary[400],
-                  mainColorStrong: appConfig.theme.colors.primary[600],
-                }}
+                theme={appConfig.theme}
+                data-js='nath'
               />
             </Box>
             {/* Formulário */}
