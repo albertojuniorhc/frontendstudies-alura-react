@@ -1,6 +1,6 @@
 export const Title = ({children, theme, tag, ...props}) => {
     const Tag = tag || 'h1';
-    console.log(props)
+    // console.log(props)
     return (
         <>
             <Tag>{children}</Tag>

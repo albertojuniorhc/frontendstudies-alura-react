@@ -35,7 +35,6 @@ import appConfig from '../config.json';
 // export default HomePage
 
 export default function PaginaInicial() {
-    // const username = 'albertojuniorhc';
     const [username, setUsername] = React.useState('');
     const roteamento = useRouter();
     const [disableBtn, setDisableBtn] = React.useState(true);
@@ -75,7 +74,7 @@ export default function PaginaInicial() {
               as="form"
               onSubmit={ (event) => {
                   event.preventDefault();
-                  roteamento.push('/chat')
+                  roteamento.push(`/chat?username=${username}`)
                 }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -153,7 +152,7 @@ export default function PaginaInicial() {
                 flex: 1,
                 minHeight: '240px',
               }}
-            >
+              >
               <Image
                 styleSheet={{
                   borderRadius: '50%',
