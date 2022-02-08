@@ -35,17 +35,10 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
         });
   
       const subscription = escutaMensagensEmTempoReal((novaMensagem) => {
-        console.log('Nova mensagem:', novaMensagem);
-        console.log('listaDeMensagens:', listaDeMensagens);
-        // Quero reusar um valor de referencia (objeto/array) 
-        // Passar uma função pro setState
-  
-        // setListaDeMensagens([
-        //     novaMensagem,
-        //     ...listaDeMensagens
-        // ])
+        // console.log('Nova mensagem:', novaMensagem);
+        // console.log('listaDeMensagens:', listaDeMensagens);
         setListaDeMensagens((valorAtualDaLista) => {
-          console.log('valorAtualDaLista:', valorAtualDaLista);
+          // console.log('valorAtualDaLista:', valorAtualDaLista);
           return [
             novaMensagem,
             ...valorAtualDaLista,
@@ -72,7 +65,7 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
           mensagem
         ])
         .then(({ data }) => {
-          console.log('Criando mensagem: ', data);
+          // console.log('Criando mensagem: ', data);
         });
   
       setMensagem('');
@@ -116,13 +109,6 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
             }}
           >
             <MessageList mensagens={listaDeMensagens} />
-            {/* {listaDeMensagens.map((mensagemAtual) => {
-                          return (
-                              <li key={mensagemAtual.id}>
-                                  {mensagemAtual.de}: {mensagemAtual.texto}
-                              </li>
-                          )
-                      })} */}
             <Box
               as="form"
               styleSheet={{
@@ -158,7 +144,6 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
               {/* CallBack */}
               <ButtonSendSticker
                 onStickerClick={(sticker) => {
-                  // console.log('[USANDO O COMPONENTE] Salva esse sticker no banco', sticker);
                   handleNovaMensagem(':sticker: ' + sticker);
                 }}
               />
@@ -244,8 +229,6 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
                   {(new Date().toLocaleDateString())}
                 </Text>
               </Box>
-              {/* [Declarativo] */}
-              {/* Condicional: {mensagem.texto.startsWith(':sticker:').toString()} */}
               {mensagem.texto.startsWith(':sticker:')
                 ? (
                   <Image src={mensagem.texto.replace(':sticker:', '')} />
@@ -253,11 +236,6 @@ function escutaMensagensEmTempoReal(adicionaMensagem) {
                 : (
                   mensagem.texto
                 )}
-              {/* if mensagem de texto possui stickers:
-                             mostra a imagem
-                          else 
-                             mensagem.texto */}
-              {/* {mensagem.texto} */}
             </Text>
           );
         })}

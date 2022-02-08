@@ -6,7 +6,7 @@ export const Label = ({children, theme, ...props}) => {
             </label>
             <style jsx>{`
                 label {
-                    color: ${theme.colors.neutrals['000']};
+                    color: ${theme.colors.neutrals['300']};
                 }    
             `}</style>
         </>
