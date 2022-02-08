@@ -1,6 +1,5 @@
 export const Title = ({children, theme, tag, ...props}) => {
     const Tag = tag || 'h1';
-    // console.log(props)
     return (
         <>
             <Tag>{children}</Tag>
@@ -14,5 +13,3 @@ export const Title = ({children, theme, tag, ...props}) => {
         </>
     );
 } 
-//${console.log(props.theme.theme.colors.neutrals['000'])}
-//color: ${props.theme.theme.colors.neutrals['500']};

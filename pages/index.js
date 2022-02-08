@@ -4,36 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../config.json';
 
-// function Title(props){
-    
-//     const Tag = props.tag || 'h1';
-//     // console.log('Props: ', props);
-//     // console.log('Tag: ', props.tag)
-//     return (
-//         <>
-//             <Tag>{props.children}</Tag>
-//             <style jsx>{`
-//             ${Tag} {
-//             color: ${appConfig.theme.colors.neutrals['500']};
-//             font-size: 24px;
-//             font-weight: 600;
-//                 }
-//             `}</style>
-//         </>
-//     );
-// }
-
-// function HomePage() {
-//     return (
-//     <div>
-//         <GlobalStyle />
-//         <Title tag="h1">Boas vindas de volta!</Title> 
-//         <h2>Discord - AluraMatrix</h2>
-//     </div>
-//     );//fechando o return
-// }
-// export default HomePage
-
 export default function PaginaInicial() {
     const [username, setUsername] = React.useState('');
     const roteamento = useRouter();
@@ -69,7 +39,7 @@ export default function PaginaInicial() {
               backgroundColor: appConfig.theme.colors.neutrals[700],
             }}
           >
-            {/* Formulário */}
+            {/* Form */}
             <Box
               as="form"
               onSubmit={ (event) => {
@@ -94,20 +64,8 @@ export default function PaginaInicial() {
 
               <Label
               theme={appConfig.theme}
-              id='oi123'
-              >Oi</Label>
+              >Insira seu nome de usuário do GitHub</Label>
               
-              {/* <input 
-              type="text"
-              value={username}
-              onChange={function (event){
-                  console.log(event.target.value);
-                  //Onde está o value?
-                  const valor = event.target.value // "event" vem do navegador.
-                  setUsername(event.target.value);
-              }}
-              /> */}
-
               <TextField
                 value={username}
                 // onChange={(event) => {
